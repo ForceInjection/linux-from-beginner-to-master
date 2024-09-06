@@ -6,3 +6,5 @@
 	- [**进程 inotify 以及 inotify watches 统计**](inotify_stat.sh)
 	- [**监视目录下文件创建或者修改示例**](inotify_monitor_path.sh)
 - [**OverlayFS 简介**](OverlayFS.md)
+- [**理解 Linux 中的进程状态**](Understanding_process_states_in_Linux.md)
+	- [**英文**](Understanding_process_states_in_Linux.pdf)
