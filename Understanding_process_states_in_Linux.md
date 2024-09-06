@@ -20,7 +20,11 @@ _S. Parthasarathy, drpartha@gmail.com_
 
 在每种 Unix 系统中，Linux 的进程可以处于多种状态。以下是进程的简化视图。
 
+![simplied view of processes](Understanding_process_states_in_Linux/0.png)
+
 进程是动态实体，因为它们的机器代码指令由 CPU 执行。Unix 及其后继版本 Linux 是多任务操作系统。
+
+![multitasking operating systems](Understanding_process_states_in_Linux/1.png)
 
 多任务系统允许多个进程同时运行而互不干扰。这种“魔法”之所以发生，是因为进程可以根据其自身以及其他竞争进程的情况动态改变状态。
 
@@ -66,6 +70,8 @@ PID   S   COMMAND
 # 2. Linux 的进程状态
 
 汽车在路上的情况可以总结为如下图所示。该图展示了每辆车在任意时刻的状态。我们将在后续讨论中交替使用汽车或进程这一术语。
+
+![stats](Understanding_process_states_in_Linux/2.png)
 
 该图高度简化了概念，但展示了大多数关键点。更复杂的状态图可以参考其他文献。现代计算机中，任何时刻可能同时有多个进程并发运行。每个进程会根据其他进程的状态不断在各种状态之间切换。
 
