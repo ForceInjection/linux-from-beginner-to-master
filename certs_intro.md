@@ -113,9 +113,8 @@ $ openssl pkcs12 -in certificate.pfx -out certificate.cer -nodes
 
 ## 六、参考资料
 
-1.  原文：[What are the differences between PEM, DER, P7B/PKCS#7, PFX/PKCS#12 certificates](https://link.jianshu.com/?t=https%3A%2F%2Fmyonlineusb.wordpress.com%2F2011%2F06%2F19%2Fwhat-are-the-differences-between-pem-der-p7bpkcs7-pfxpkcs12-certificates%2F)
-2.  参考 [《那些证书相关的玩意儿（SSL,X.509,PEM,DER,CRT,CER,KEY,CSR,P12等）》](https://link.jianshu.com/?t=http%3A%2F%2Fwww.360doc.com%2Fcontent%2F15%2F0520%2F10%2F21412_471902987.shtml) 部分内容做了补充
+1.  [What are the differences between PEM, DER, P7B/PKCS#7, PFX/PKCS#12 certificates](https://myonlineusb.wordpress.com/2011/06/19/what-are-the-differences-between-pem-der-p7bpkcs7-pfxpkcs12-certificates/)
+2.  [那些证书相关的玩意儿（SSL,X.509,PEM,DER,CRT,CER,KEY,CSR,P12等）](http://www.360doc.com/content/15/0520/10/21412_471902987.shtml) 
 3.  [常见数字证书及协议介绍](https://www.jianshu.com/p/f32852523f1b)
-4.  [RSA私钥和公钥文件格式 (pkcs#7, pkcs#8, pkcs#12, pem)](https://link.jianshu.com/?t=http%3A%2F%2Fblog.csdn.net%2Ftuhuolong%2Farticle%2Fdetails%2F42778945)
-5.  [ASN.1 key structures in DER and PEM](https://link.jianshu.com/?t=https%3A%2F%2Ftls.mbed.org%2Fkb%2Fcryptography%2Fasn1-key-structures-in-der-and-pem)
-6.  [openSSL将.crt证书生成.bks](https://link.jianshu.com/?t=https%3A%2F%2Fblog.csdn.net%2Fqq_36992688%2Farticle%2Fdetails%2F78861883)
+4.  [RSA私钥和公钥文件格式 (pkcs#7, pkcs#8, pkcs#12, pem)](https://blog.csdn.net/tuhuolong/article/details/42778945)
+5.  [ASN.1 key structures in DER and PEM](https://mbed-tls.readthedocs.io/en/latest/kb/cryptography/asn1-key-structures-in-der-and-pem/)
