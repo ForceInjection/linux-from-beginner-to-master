@@ -1,4 +1,4 @@
-# 原力注入 Linux 最佳实践
+# 原力注入 Linux 从入门到精通
 
 ![回归技术本质](bad_phenomenon.png)
 
