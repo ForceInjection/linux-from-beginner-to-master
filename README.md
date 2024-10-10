@@ -1,5 +1,12 @@
 # 原力注入 Linux 最佳实践
 
+## 教程
+- **极简 Linux 入门使用教程**
+	- [**背景介绍**](getting_started/background.md)
+	- [**Shell 入门**](getting_started/shells.md)
+	- [**文本编辑器入门**](getting_started/text-editors.md)
+	- [**杂项**](getting_started/miscellaneous.md)
+
 ## Process
 - [**理解 Linux 中的进程状态**](process/Understanding_process_states_in_Linux.md)
 	- [**英文**](process/Understanding_process_states_in_Linux.pdf)
