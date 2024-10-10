@@ -1,5 +1,8 @@
 # 原力注入 Linux 最佳实践
 
+![回归技术本质](bad_phenomenon.png)
+回归技术本质，即回归到底层技术以及细节上！
+
 ## 教程
 - **极简 Linux 入门使用教程**
 	- [**背景介绍**](getting_started/background.md)
