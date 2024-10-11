@@ -26,6 +26,7 @@
 
 ## Shell
 - [**Linux `set` 命令详解**](shell/Linux_set_Command_Explained.md)
+- [**清理多余安装的 kernels**](shell/remove_odl_kernels.sh)
 
 ## 证书
 - [**安全证书简介**](certs_intro.md)
