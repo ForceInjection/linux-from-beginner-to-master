@@ -28,6 +28,9 @@
 - [**Linux `set` 命令详解**](shell/Linux_set_Command_Explained.md)
 - [**清理多余安装的 kernels**](shell/remove_odl_kernels.sh)
 
+## 管理员
+- [**管理内核驱动和模块**](kernel_adminstration.md)
+
 ## 证书
 - [**安全证书简介**](certs_intro.md)
 - [**Deep Dive into SSL certificates**](ssl_certs.md)
