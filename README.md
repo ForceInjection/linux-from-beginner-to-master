@@ -34,3 +34,7 @@
 ## 证书
 - [**安全证书简介**](certs_intro.md)
 - [**Deep Dive into SSL certificates**](ssl_certs.md)
+
+## 内核
+- [**Linux 异步 I/O 框架 io_uring：基本原理、程序示例与性能压测（2020）**](https://arthurchiao.art/blog/intro-to-io-uring-zh/)
+- [**Awesome io_uring**](https://github.com/espoal/awesome-iouring)
