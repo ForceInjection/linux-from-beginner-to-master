@@ -29,7 +29,7 @@
 - [**清理多余安装的 kernels**](shell/remove_old_kernels.sh)
 
 ## 管理员
-- [**管理内核驱动和模块**](kernel_adminstration.md)
+- [**管理内核驱动和模块**](kernel_adminstration_cn.md)
 
 ## 证书
 - [**安全证书简介**](certs_intro.md)
