@@ -20,6 +20,7 @@
 	- [**进程 inotify 以及 inotify watches 统计**](fs/inotify_stat.sh)
 	- [**监视目录下文件创建或者修改示例**](fs/inotify_monitor_path.sh)
 - [**OverlayFS 简介**](fs/OverlayFS.md)
+- [**使用 `autofs` 实现 `mount --bind ` 自动挂载**](fs/autofs.md)
 
 ## Systemd
 - [**如何在 Linux 中创建 Systemd 服务**](systemd/Systemd_Service_Creation_Guide.md)
