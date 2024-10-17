@@ -2,7 +2,10 @@
 
 Autofs 是一项按需挂载目录的服务，通过使用 Autofs，当我们访问 NFS/Samba 服务的时候，自动挂载到事先指定好的目录，在一段时间后（默认300秒）会自动断开，相较于直接将 `mount` 命令写入到开机启动或者 `/etc/fstab` 中的做法，Autofs 更加智能，同时也能够节约网络的带宽以及减少对服务器的资源占用。
 
-> autofs is a program for automatically mounting directories on an as-needed basis. Auto-mounts are mounted only as they are accessed, and are unmounted after a period of inactivity. Because of this, automounting NFS/Samba shares conserves bandwidth and offers better overall performance compared to static mounts via `fstab`.
+更多参考文档：
+
+- [Linux Kernel 文档:《autofs - how it works》](https://docs.kernel.org/filesystems/autofs.html)
+- [Redhat 存储管理指南:《autofs》](https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/nfs-autofs)
 
 ## 1. 安装 `autofs`
 
