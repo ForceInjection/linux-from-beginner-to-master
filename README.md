@@ -29,6 +29,7 @@
 ## Shell
 - [**Linux `set` 命令详解**](shell/Linux_set_Command_Explained.md)
 - [**清理多余安装的 kernels**](shell/remove_old_kernels.sh)
+- [**Linux 删除文件错误处理**](rm_failed.md)
 
 ## 管理员
 - [**管理内核驱动和模块**](kernel_adminstration_cn.md)
