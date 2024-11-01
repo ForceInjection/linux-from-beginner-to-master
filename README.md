@@ -32,6 +32,8 @@
 
 ## 网络
 - [**Linux 网络优化之网卡及内核相关参数**](net/net_optimize_cmd.md)
+- [**Broadcom Ethernet Network Adapter User Guide**](net/broadcom-ethernet-network-adapter-user-guide.pdf)
+- [**超赞！Linux Network Stack**](net/linux_network_stack_en.pdf)
 
 ## 安全
 ### 证书
