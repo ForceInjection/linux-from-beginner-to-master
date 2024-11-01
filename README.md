@@ -12,8 +12,7 @@
 	- [**杂项**](getting_started/miscellaneous.md)
 
 ## Process
-- [**理解 Linux 中的进程状态**](process/Understanding_process_states_in_Linux.md)
-	- [**英文**](process/Understanding_process_states_in_Linux.pdf)
+- [**理解 Linux 中的进程状态**](process/Understanding_process_states_in_Linux.md)/[**英文**](process/Understanding_process_states_in_Linux.pdf)
 - [**Linux 二进制文件格式 ELF 101**](elf_101.md)
 
 ## FileSystem
@@ -29,15 +28,17 @@
 ## Shell
 - [**Linux `set` 命令详解**](shell/Linux_set_Command_Explained.md)
 - [**清理多余安装的 kernels**](shell/remove_old_kernels.sh)
-- [**Linux 删除文件错误处理**](rm_failed.md)
+- [**Linux 删除文件错误处理**](shell/rm_failed.md)
 
-## 管理员
-- [**管理内核驱动和模块**](kernel_adminstration_cn.md)
+## 网络
+- [**Linux 网络优化之网卡及内核相关参数**](net/net_optimize_cmd.md)
 
-## 证书
-- [**安全证书简介**](certs_intro.md)
-- [**Deep Dive into SSL certificates**](ssl_certs.md)
+## 安全
+### 证书
+- [**安全证书简介**](security/certs_intro.md)
+- [**Deep Dive into SSL certificates**](security/ssl_certs.md)
 
 ## 内核
 - [**Linux 异步 I/O 框架 io_uring：基本原理、程序示例与性能压测（2020）**](https://arthurchiao.art/blog/intro-to-io-uring-zh/)
 - [**Awesome io_uring**](https://github.com/espoal/awesome-iouring)
+- [**管理内核驱动和模块**](kernel/kernel_adminstration_cn.md)
