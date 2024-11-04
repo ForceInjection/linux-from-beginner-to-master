@@ -44,3 +44,6 @@
 - [**Linux 异步 I/O 框架 io_uring：基本原理、程序示例与性能压测（2020）**](https://arthurchiao.art/blog/intro-to-io-uring-zh/)
 - [**Awesome io_uring**](https://github.com/espoal/awesome-iouring)
 - [**管理内核驱动和模块**](kernel/kernel_adminstration_cn.md)
+
+## 参考书
+- [**现代 CPU 性能分析与优化**](https://weedge.github.io/perf-book-cn/zh/)
