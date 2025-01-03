@@ -4,6 +4,10 @@
 
 回归技术本质，即回归到底层技术以及细节上！
 
+## 微信公众号合集
+- [**原力注入 Linux 合集**](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0OTIzOTMzMA==&action=getalbum&album_id=3150355891553255432#wechat_redirect)
+- [**原力注入 Linux 小技巧 合集**](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0OTIzOTMzMA==&action=getalbum&album_id=3170826494684905472#wechat_redirect)
+
 ## 教程
 - **极简 Linux 入门使用教程**
 	- [**背景介绍**](getting_started/background.md)
