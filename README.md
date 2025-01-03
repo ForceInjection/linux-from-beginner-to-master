@@ -11,6 +11,9 @@
 	- [**文本编辑器入门**](getting_started/text-editors.md)
 	- [**杂项**](getting_started/miscellaneous.md)
 
+## CPU
+- [**Linux 中 x86 上下文切换的演变**](linux-context-switch-history-cn.md)
+
 ## Process
 - [**理解 Linux 中的进程状态**](process/Understanding_process_states_in_Linux.md)/[**英文**](process/Understanding_process_states_in_Linux.pdf)
 - [**Linux 二进制文件格式 ELF 101**](elf_101.md)
