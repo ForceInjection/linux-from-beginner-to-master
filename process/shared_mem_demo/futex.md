@@ -4,7 +4,7 @@
 
 详细参考：[**一文搞清楚操作系统中的锁**](https://mp.weixin.qq.com/s/2H1-7Iiuxyp3uWNEItqJ8g)
 
-## 代码
+## 相关代码
 
 ### [common_v2.h](common_v2.h)
 
