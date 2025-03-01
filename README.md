@@ -22,6 +22,7 @@
 - [**理解 Linux 中的进程状态**](process/Understanding_process_states_in_Linux.md)/[**英文**](process/Understanding_process_states_in_Linux.pdf)
 - [**Linux 二进制文件格式 ELF 101**](process/elf_101.md)
 - [**Linux 进程间共享内存通信方案**](process/shared_mem_demo/readme.md)
+- [**Linux 进程间共享内存通信方案 v2：基于 Futex 锁的实现**](process/shared_mem_demo/futex.md)
 
 ## FileSystem
 - [**Linux `inotify` 简介**](fs/What_is_inotify.md)
