@@ -1,4 +1,4 @@
-# Linux 内核版本和变更记录查看指南
+# Linux 内核版本变更记录查看指南
 
 本指南面向希望理解 `Linux` 内核更新机制、定位安全补丁、追踪补丁源码来源的技术人员，涵盖 `changelog` 获取、`CVE` 快速筛选、源码版本控制操作以及真实案例分析，帮助你从「内核升级日志」走向「代码级掌握」。
 
@@ -35,15 +35,15 @@ kernel-tools-libs-3.10.0-1160.119.1.el7.x86_64
 
 这些信息可以帮助我们判断系统是否已应用特定补丁、是否与某些工具版本匹配，或是否存在已知的兼容性问题。
 
-### 版本号结构解析
+### 1.1 版本号结构解析
 
-#### 示例一：`5.4.0-153-generic`（Ubuntu 系）
+#### 1.1.1 示例一：`5.4.0-153-generic`（Ubuntu 系）
 
 ```text
 5.4.0-153-generic
 ↑ ↑   ↑     ↑
 │ │   │     └─ 架构/构建标识（如 Ubuntu 的构建标识 generic、lowlatency 等）
-│ │   └────── 发行版维护版本号（由发行版定义，如 Ubuntu 的 `153`）
+│ │   └────── 发行版维护版本号（由发行版定义）
 │ └────────── 次版本号（minor version，即 4）
 └──────────── 主版本号（major version，即 5）
 ```
@@ -52,17 +52,9 @@ kernel-tools-libs-3.10.0-1160.119.1.el7.x86_64
 * `153`：发行版维护版本号，表示该发行版在 `5.4.0` 基础上叠加的第 153 次更新（包含安全补丁、驱动适配等）。
 * `generic`：内核构建配置标签，常见如 `generic`（通用内核）、`lowlatency`（低延迟内核）等，是 Ubuntu 和 Debian 系列的标准标识。
 
-> 小结：
->
-> * `5`：主版本号（major version），表示 Linux 内核的主代数；
-> * `4`：次版本号（minor version），表示该主版本下的子系列；
-> * `0`：修订版本（用于兼容性维护，部分发行版中无实际意义）；
-> * `153`：发行版打的补丁次数或维护版本号；
-> * `generic`：面向通用用途的构建标签。
-
 ---
 
-#### 示例二：`3.10.0-1160.119.1.el7.x86_64`（CentOS / RHEL 系）
+#### 1.1.2 示例二：`3.10.0-1160.119.1.el7.x86_64`（CentOS / RHEL 系）
 
 ```text
 3.10.0-1160.119.1.el7.x86_64
@@ -103,9 +95,9 @@ kernel-tools-libs-3.10.0-1160.119.1.el7.x86_64
 
 #### 2.1.1 主线内核（Mainline Kernel）
 
-主线内核由 Linus Torvalds 及社区在 [kernel.org](https://www.kernel.org) 上维护，采用 Git 管理，遵循如下版本发布策略：
+主线内核由 `Linus Torvalds` 及社区在 [kernel.org](https://www.kernel.org) 上维护，采用 Git 管理，遵循如下版本发布策略：
 
-| 类型     | 示例版本             | 特点                        |
+| 类型 | 示例版本 | 特点 |
 | ------ | ---------------- | ------------------------- |
 | 主线版本   | `v6.6`           | 包含最新功能，更新频繁，适合开发与测试场景     |
 | 稳定版本   | `v6.6.3`         | 在主线基础上修复 Bug 与安全问题，适合通用用途 |
@@ -117,11 +109,11 @@ kernel-tools-libs-3.10.0-1160.119.1.el7.x86_64
 
 各大 Linux 发行版（如 Ubuntu、Debian、Red Hat、SUSE 等）基于某一主线版本制作定制内核，通常包含以下特性：
 
-| 特性      | 说明                                                                |
+| 特性 | 说明 |
 | ------- | ----------------------------------------------------------------- |
-| 基于主线某版本 | 如 Ubuntu 20.04 的 `5.4.0-153` 基于主线 `v5.4` 系列                       |
-| 定制补丁    | 包括驱动增强、架构支持、系统策略（如 AppArmor、SELinux）等                             |
-| 安全更新    | 通过 Backport 将主线修复补丁移植到旧版本内核                                       |
+| 基于主线某版本 | 如 Ubuntu 20.04 的 `5.4.0-153` 基于主线 `v5.4` 系列 |
+| 定制补丁    | 包括驱动增强、架构支持、系统策略（如 AppArmor、SELinux）等 |
+| 安全更新    | 通过 Backport 将主线修复补丁移植到旧版本内核 |
 | 命名规则不同  | 发行版内核版本常见形式为 `<主线版本>-<patch level>.<build num>`，如 `5.4.0-153.170` |
 
 因此在分析补丁或问题时应注意：
@@ -296,7 +288,7 @@ Ubuntu 的内核源码与变更日志可从以下位置获取：
 
 ### 3.1 changelog 的来源与格式说明
 
-不同 `Linux` 发行版构建内核的流程和变更记录格式存在差异，主要体现在内核包的 changelog 来源及组织方式上。
+不同 `Linux` 发行版构建内核的流程和变更记录格式存在差异，主要体现在内核包的 `changelog` 来源及组织方式上。
 
 | 发行版类型 | changelog 来源               | 格式说明                                             |
 | ----- | -------------------------- | ------------------------------------------------ |
@@ -307,11 +299,48 @@ Ubuntu 的内核源码与变更日志可从以下位置获取：
 
 此外，还可以直接查看 Linux 官方源码的 changelog 文件，例如：
 
-* **Linux 主线版本的官方 ChangeLog**：
-  [https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.0.1](https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.0.1)
+* **Linux 主线版本的官方 ChangeLog**：[https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.0.1](https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.0.1)
 
-* **Ubuntu 官方内核源码与 changelog 仓库**：
-  [https://git.launchpad.net/ubuntu/+source/linux](https://git.launchpad.net/ubuntu/+source/linux)
+* **Ubuntu 官方内核源码与 changelog 仓库**：[https://git.launchpad.net/ubuntu/+source/linux](https://git.launchpad.net/ubuntu/+source/linux)
+
+---
+
+### 3.1.1 Ubuntu changelog 查询方式补充
+
+Ubuntu 用户可通过以下三种方式查看某个内核版本的变更日志，用于确认漏洞修复、安全更新或内核行为变动：
+
+#### 方法一：使用 `apt-get changelog` 命令（推荐）
+
+适用于系统已安装该内核版本的情况，直接查看对应的内核包 `changelog`：
+
+```bash
+apt-get changelog linux-image-$(uname -r)
+```
+
+> 也可替换为其他特定版本，如：
+> `apt-get changelog linux-image-5.15.0-105-generic`
+
+---
+
+#### 方法二：访问 changelogs.ubuntu.com 网站
+
+适用于查阅任意 Ubuntu 发布版本的 `linux` 包 changelog，无需本地安装：
+
+* 网站入口：[https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/)
+
+* 示例地址（查看 `linux_5.15.0-105.115`）：[https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux\_5.15.0-105.115/changelog](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_5.15.0-105.115/changelog)
+
+---
+
+#### 方法三：通过 Launchpad 查看内核源码包信息
+
+适用于深入了解内核构建历史、补丁内容、关联 bug 信息等：
+
+* Ubuntu 源码概览：[https://launchpad.net/ubuntu/+source/linux](https://launchpad.net/ubuntu/+source/linux)
+
+* 指定版本页面（如 `5.15.0-105.115`）：[https://launchpad.net/ubuntu/+source/linux/5.15.0-105.115](https://launchpad.net/ubuntu/+source/linux/5.15.0-105.115)
+
+* 查看所有版本 changelog：[https://launchpad.net/ubuntu/+source/linux/+changelog](https://launchpad.net/ubuntu/+source/linux/+changelog)
 
 ---
 
@@ -319,14 +348,14 @@ Ubuntu 的内核源码与变更日志可从以下位置获取：
 
 在实际分析中，我们往往需要从大量 changelog 内容中快速定位与 **安全相关的更新（CVE、安全修复）**，可结合关键字和过滤命令操作：
 
-#### RPM 系（如 RHEL、CentOS、AlmaLinux）
+#### 3.2.1 RPM 系（如 RHEL、CentOS、AlmaLinux）
 
 ```bash
 # 显示与安全相关的 changelog 条目（包含 CVE 或 [security] 字样）
 rpm -q --changelog kernel | grep -E -C3 "CVE-|\\[security\\]"
 ```
 
-#### APT 系（如 Ubuntu、Debian）
+#### 3.2.2 APT 系（如 Ubuntu、Debian）
 
 ```bash
 # 查看当前运行内核版本的 changelog，并筛选出含有 security/CVE 的内容
@@ -337,7 +366,7 @@ apt-get changelog linux-image-$(uname -r) | grep -i "security\\|CVE-"
 
 ### 3.3 示例：Ubuntu 内核包变更日志节选
 
-以下是 Ubuntu 20.04 中内核包 `linux-image-5.4.0-153-generic` 的 changelog 节选：
+以下是 `Ubuntu 20.04` 中内核包 `linux-image-5.4.0-153-generic` 的 changelog 节选：
 
 ```text
 linux (5.4.0-153.170) focal; urgency=medium
@@ -354,27 +383,84 @@ linux (5.4.0-153.170) focal; urgency=medium
  -- Thadeu Lima de Souza Cascardo <email address hidden>  Fri, 16 Jun 2023 10:20:20 -0300
 ```
 
-> 详细参见：`https://launchpad.net/ubuntu/%2Bsource/linux/5.4.0-153.170`
+> 详细参见：
+> [https://launchpad.net/ubuntu/%2Bsource/linux/5.4.0-153.170](https://launchpad.net/ubuntu/%2Bsource/linux/5.4.0-153.170)
 
 #### 说明：
 
 * `linux (5.4.0-153.170)`：表示该内核包的完整版本号，`.170` 是 Ubuntu 的内部构建版本；
-* `urgency=medium`：指明更新紧急程度（Debian changelog 标准字段）；
-* `LP: #2024108`、`LP: #2023577`、`LP: #2023220`：关联的 Launchpad Bug 编号，可通过 [https://bugs.launchpad.net/](https://bugs.launchpad.net/) 查看详细描述，例如：[https://bugs.launchpad.net/kernel-sru-workflow/+bug/2024108](https://bugs.launchpad.net/kernel-sru-workflow/+bug/2024108)。
+* `urgency=medium`：指明更新紧急程度（`Debian changelog` 标准字段）；
+* `LP: #2024108`、`LP: #2023577`、`LP: #2023220`：关联的 Launchpad Bug 编号，可通过 [https://bugs.launchpad.net/](https://bugs.launchpad.net/) 查询详细信息。
 
 ---
 
-### 3.4 Ubuntu 内核源码与 changelog 仓库地址
+### 3.4 CentOS / RHEL 系发行版的 changelog 与安全信息查询
 
-如果希望深入了解 Ubuntu 某个内核版本的构建细节、补丁合入历史等，可以参考以下官方资源：
-
-| 项目内容 | 地址 |
-| ----------------- | -------------------------- |
-| Ubuntu 内核源码仓库     | [https://git.launchpad.net/ubuntu/+source/linux](https://git.launchpad.net/ubuntu/+source/linux)                           |
-| Ubuntu patch 管理说明 | [https://wiki.ubuntu.com/Kernel/SourceCode](https://wiki.ubuntu.com/Kernel/SourceCode)                                     |
-| 具体版本 changelog 浏览 | [https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/) |
+对于使用 CentOS、RHEL 或基于 Red Hat 系列的衍生发行版（如 AlmaLinux、Rocky Linux），可通过如下方式获取内核更新日志与安全修复信息：
 
 ---
+
+#### 3.4.1 Red Hat 官方变更记录（Errata 与内核更新公告）
+
+Red Hat 提供了完整的安全公告（RHSA）、错误修复公告（RHBA）和功能增强公告（RHEA），涵盖各类包的变更信息。
+
+* 官方查询页面（需要登录）：[https://access.redhat.com/errata](https://access.redhat.com/errata)
+
+> 说明：RHSA 编号中通常会包含修复的 CVE 编号和影响版本，适合用来判断补丁是否已下发。
+
+---
+
+#### 3.4.2 Red Hat CVE 安全数据库
+
+Red Hat 提供专门的 CVE 查询页面，可根据漏洞编号查看影响组件、补丁状态、修复包版本等：
+
+* CVE 安全更新数据库：[https://access.redhat.com/security/security-updates/#/cve](https://access.redhat.com/security/security-updates/#/cve)
+
+* 示例查询：[https://access.redhat.com/security/cve/CVE-2023-6543](https://access.redhat.com/security/cve/CVE-2023-6543)
+
+---
+
+#### 3.4.3 CentOS 源码包 changelog 查看
+
+虽然 CentOS 没有独立的 changelog 网页接口，但我们可以通过 **获取 `.src.rpm` 源码包并查看 `.spec` 文件** 中的 `%changelog` 段落来获取构建时记录：
+
+* 镜像源地址（CentOS 9 Stream 为例）：[https://mirror.stream.centos.org/9-stream/BaseOS/source/tree/Packages/](https://mirror.stream.centos.org/9-stream/BaseOS/source/tree/Packages/)
+
+查看方法：
+
+```bash
+# 下载并解包 src.rpm 文件
+rpm2cpio kernel-4.18.0-513.el8.src.rpm | cpio -idmv
+
+# 查看 changelog
+less kernel.spec
+```
+
+> `%changelog` 中也会标注修复摘要、CVE 编号和提交者信息，与 RHEL 对应版本基本一致。
+
+---
+
+#### 3.4.4 CentOS/RHEL 内核 Git 镜像仓库
+
+Red Hat 内核源码构建过程为闭源，但 CentOS Stream 提供了开放的 Git 仓库，可用于追踪源码更新、补丁应用历史：
+
+* 官方 Git 仓库：[https://git.centos.org/rpms/kernel](https://git.centos.org/rpms/kernel)
+
+---
+
+#### 3.4.5 OracleLinux.pkgs.org：快速查阅内核包 changelog
+
+虽然该站点主要用于 Oracle Linux，但其内核包版本和 RHEL 系兼容，许多版本一致或高度相近，适用于辅助查看 changelog 与构建信息。
+
+* 查询页面：[https://oraclelinux.pkgs.org](https://oraclelinux.pkgs.org)
+
+* 示例：查看 kernel-4.18.0-513.11.0.1.el8_9.x86_64 包信息与 changelog：
+  [https://oraclelinux.pkgs.org/8/ol8-baseos-latest-x86_64/kernel-4.18.0-513.11.0.1.el8_9.x86_64.rpm.html](https://oraclelinux.pkgs.org/8/ol8-baseos-latest-x86_64/kernel-4.18.0-513.11.0.1.el8_9.x86_64.rpm.html)
+
+> 说明：该页面包含完整的 changelog 条目、构建时间、依赖信息等，适用于无法访问 Red Hat 官网的用户使用场景。
+
+---
+
 
 ## 4. 源码级追踪（Git 操作）
 
