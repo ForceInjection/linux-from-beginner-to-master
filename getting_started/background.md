@@ -1,55 +1,55 @@
-# Background
+# 背景
 
-This topic describes the history and motivation behind Linux, identifies its fundamental design paradigm, and explains how modern Linux supports scientific computing.
+本主题描述了Linux的历史和动机，确定了其基本设计范式，并解释了现代Linux如何支持科学计算。
 
-## Introduction
+## 介绍
 
-The Linux operating system is an extremely versatile Unix-like operating system, and has taken a clear lead in the High Performance Computing (HPC) and scientific computing community. Linux is a multi-user, preemptive multitasking operating system that provides a number of facilities including management of hardware resources, directories, and file systems, as well as the loading and execution of programs. A vast number of utilities and libraries have been developed (mostly free and open source as well) to accompany or extend Linux.
+Linux操作系统是一个极其多功能的类Unix操作系统，在高性能计算(HPC)和科学计算社区中占据了明显的领先地位。Linux是一个多用户、抢占式多任务操作系统，提供了许多功能，包括硬件资源管理、目录和文件系统管理，以及程序的加载和执行。大量的实用程序和库已经被开发出来(大多数也是免费和开源的)来配合或扩展Linux。
 
-There are two major components of Linux, the kernel and the shell:
+Linux有两个主要组件，内核和shell：
 
-1.  The kernel is the core of the Linux operating system that schedules processes and interfaces directly with the hardware. It manages system and user I/O, processes, devices, files, and memory.
-2.  The shell is a text-only interface to the kernel. Users input commands through the shell, and the kernel receives the tasks from the shell and performs them. The shell tends to do four jobs repeatedly: display a prompt, read a command, process the given command, then execute the command. After which it starts the process all over again.
+1. 内核是Linux操作系统的核心，负责调度进程并直接与硬件接口。它管理系统和用户I/O、进程、设备、文件和内存。
+2. shell是内核的纯文本界面。用户通过shell输入命令，内核从shell接收任务并执行它们。shell倾向于重复做四项工作：显示提示符、读取命令、处理给定的命令，然后执行命令。之后它重新开始整个过程。
 
-It is important to note that users of a Linux system typically _do not_ interact with the kernel directly. Rather, most user interaction is done through the shell or a desktop environment.
+重要的是要注意，Linux系统的用户通常_不会_直接与内核交互。相反，大多数用户交互是通过shell或桌面环境完成的。
 
-## History
+## 历史
 
 ### Unix
 
-The Unix operating system got its start in 1969 at Bell Laboratories and was written in assembly language. In 1973, Ken Thompson and Dennis Ritchie succeeded in rewriting Unix in their new language C. This was quite an audacious move; at the time, system programming was done in assembly in order to extract maximum performance from the hardware. The concept of a portable operating system was barely a gleam in anyone's eye.
+Unix操作系统于1969年在贝尔实验室起步，用汇编语言编写。1973年，Ken Thompson和Dennis Ritchie成功地用他们的新语言C重写了Unix。这是一个相当大胆的举动；当时，系统编程是用汇编语言完成的，以便从硬件中提取最大性能。可移植操作系统的概念几乎还没有在任何人的眼中闪现。
 
-The creation of a portable operating system was very significant in the computing industry, but then came the problem of licensing each type of Unix. Richard Stallman, an American software freedom activist and programmer recognized a need for open source solutions and launched the GNU project in 1983, later founding the [Free Software Foundation](https://www.fsf.org/). His goal was to create a completely free and open source operating system that was Unix-compatible or [Unix-like](https://en.wikipedia.org/wiki/Unix-like).
+可移植操作系统的创建在计算行业中非常重要，但随后出现了为每种类型的Unix授权的问题。Richard Stallman，一位美国软件自由活动家和程序员，认识到对开源解决方案的需求，并于1983年启动了GNU项目，后来成立了[自由软件基金会](https://www.fsf.org/)。他的目标是创建一个完全免费和开源的操作系统，与Unix兼容或[类Unix](https://en.wikipedia.org/wiki/Unix-like)。
 
 ### Linux
 
-In 1987, the source code to a minimalistic Unix-like operating system called [MINIX](https://en.wikipedia.org/wiki/MINIX) was released by Andrew Tanenbaum, a professor at Vrije Universiteit, for academic purposes. Linus Torvalds began developing a new operating system [based on MINIX](https://groups.google.com/forum/#!msg/comp.os.minix/dlNtH7RRrGA/SwRavCzVE7gJ) while a student at the University of Helsinki in 1991. In September of 1991, Torvalds released the first version (0.1) of the Linux kernel.
+1987年，Vrije Universiteit的教授Andrew Tanenbaum为学术目的发布了一个名为[MINIX](https://en.wikipedia.org/wiki/MINIX)的极简类Unix操作系统的源代码。1991年，Linus Torvalds在赫尔辛基大学读书时开始开发一个[基于MINIX](https://groups.google.com/forum/#!msg/comp.os.minix/dlNtH7RRrGA/SwRavCzVE7gJ)的新操作系统。1991年9月，Torvalds发布了Linux内核的第一个版本(0.1)。
 
-Torvalds greatly enhanced the open source community by releasing the Linux kernel under the [GNU General Public License](https://en.wikipedia.org/wiki/GNU_General_Public_License) so that everyone has access to the source code and can freely make modifications to it. Many components from the GNU project, such as the [GNU Core Utilities](https://en.wikipedia.org/wiki/GNU_Core_Utilities), were then integrated with the Linux kernel, thus completing the first free and open source operating system.
+Torvalds通过在[GNU通用公共许可证](https://en.wikipedia.org/wiki/GNU_General_Public_License)下发布Linux内核，极大地增强了开源社区，使每个人都可以访问源代码并可以自由地对其进行修改。GNU项目的许多组件，如[GNU核心实用程序](https://en.wikipedia.org/wiki/GNU_Core_Utilities)，然后与Linux内核集成，从而完成了第一个免费和开源操作系统。
 
-Linux has been adapted to a variety of computer systems of many sizes and purposes. Furthermore, different variants of Linux (called Linux distributions) have been [developed over time](https://en.wikipedia.org/wiki/Linux_distribution#History) to meet various needs. There are now hundreds of different Linux distributions available, with a wide variety of features. The most popular operating system in the world is actually [Android](https://en.wikipedia.org/wiki/Android_(operating_system)), which is built on the Linux kernel.
+Linux已经适应了各种规模和用途的计算机系统。此外，Linux的不同变体(称为Linux发行版)已经[随着时间的推移而发展](https://en.wikipedia.org/wiki/Linux_distribution#History)以满足各种需求。现在有数百种不同的Linux发行版可用，具有各种各样的功能。世界上最流行的操作系统实际上是[Android](https://en.wikipedia.org/wiki/Android_(operating_system))，它是建立在Linux内核之上的。
 
-## Why Linux?
+## 为什么选择Linux？
 
-Linux has been so heavily utilized in the HPC and scientific computing community that it has become the standard in many areas of academic and scientific research, particularly those requiring HPC. There have been over 40 years of development in Unix and Linux, with many academic, scientific, and system tools. In fact, as of November 2017, _all of the [TOP500](https://www.top500.org/statistics/list/) supercomputers in the world run Linux!_
+Linux在HPC和科学计算社区中被如此大量使用，以至于它已经成为许多学术和科学研究领域的标准，特别是那些需要HPC的领域。Unix和Linux已经有超过40年的发展历史，拥有许多学术、科学和系统工具。事实上，截至2017年11月，_世界上所有的[TOP500](https://www.top500.org/statistics/list/)超级计算机都运行Linux！_
 
-Linux has four essential properties which make it an excellent operating system for the science community:
+Linux有四个基本属性，使其成为科学社区的优秀操作系统：
 
-*   **Performance** – Performance of the operating system can be optimized for specific tasks such as running small portable devices or large supercomputers.
-*   **Functionality** – A number of community-driven scientific applications and libraries have been developed under Linux such as molecular dynamics, linear algebra, and fast-Fourier transforms.
-*   **Flexibility** – The system is flexible enough to allow users to build applications with a wide array of support tools such as compilers, scientific libraries, debuggers, and network monitors.
-*   **Portability** – The operating system, utilities, and libraries have been ported to a wide variety of devices including desktops, clusters, supercomputers, mainframes, embedded systems, and smart phones.
+* **性能** – 操作系统的性能可以针对特定任务进行优化，如运行小型便携设备或大型超级计算机。
+* **功能性** – 许多社区驱动的科学应用程序和库已经在Linux下开发，如分子动力学、线性代数和快速傅里叶变换。
+* **灵活性** – 系统足够灵活，允许用户使用各种支持工具构建应用程序，如编译器、科学库、调试器和网络监视器。
+* **可移植性** – 操作系统、实用程序和库已经移植到各种设备，包括台式机、集群、超级计算机、大型机、嵌入式系统和智能手机。
 
-## Files and Processes
+## 文件和进程
 
-Everything in Linux is considered to be either a _file_ or a _process_:
+Linux中的一切都被认为是_文件_或_进程_：
 
-*   A process is an executing program identified by a unique process identifier, called a PID. Processes may be short in duration, such as a process that prints a file to the screen, or they may run indefinitely, such as a monitor program.
-*   A file is a collection of data, with a location in the file system called a path. Paths will typically be a series of words (directory names) separated by forward slashes, /. Files are generally created by users via text editors, compilers, or other means.
-*   A directory is a special type of file. Linux uses a directory to hold information about other files. You can think of a directory as a container that holds other files or directories; it is equivalent to a folder in Windows or macOS.
+* 进程是由唯一进程标识符(称为PID)标识的正在执行的程序。进程可能持续时间很短，如将文件打印到屏幕的进程，或者可能无限期运行，如监视程序。
+* 文件是数据的集合，在文件系统中有一个称为路径的位置。路径通常是由正斜杠/分隔的一系列单词(目录名)。文件通常由用户通过文本编辑器、编译器或其他方式创建。
+* 目录是一种特殊类型的文件。Linux使用目录来保存有关其他文件的信息。您可以将目录视为包含其他文件或目录的容器；它相当于Windows或macOS中的文件夹。
 
-A file is typically stored on physical storage media such as a disk (hard drive, flash disk, etc.). Every file must have a name because the operating system identifies files by their name. File names may contain any characters, although some special characters (such as spaces, quotes, and parenthesis) can make it difficult to access the file, so you should avoid them in filenames. On most common Linux variants, file names can be as long as 255 characters, so it is convenient to use descriptive names.
+文件通常存储在物理存储介质上，如磁盘(硬盘驱动器、闪存盘等)。每个文件都必须有一个名称，因为操作系统通过名称识别文件。文件名可以包含任何字符，尽管一些特殊字符(如空格、引号和括号)可能使访问文件变得困难，所以您应该在文件名中避免使用它们。在大多数常见的Linux变体上，文件名可以长达255个字符，因此使用描述性名称很方便。
 
-Files can hold any sequence of bytes; it is up to the user to choose the appropriate application to correctly interpret the file contents. Files can be human readable text organized line by line, a structured sequence only readable by a specific application, or a machine-readable byte sequence. Many programs interpret the contents of a file as having some special structure, such as a pdf or postscript file. In scientific computing, binary files are often used for efficiency storage and data access. Some other examples include scientific data formats like NetCDF or HDF which have specific formats and provide application programming interfaces (APIs) for reading and writing.
+文件可以保存任何字节序列；由用户选择适当的应用程序来正确解释文件内容。文件可以是按行组织的人类可读文本、只能由特定应用程序读取的结构化序列，或机器可读的字节序列。许多程序将文件的内容解释为具有某种特殊结构，如pdf或postscript文件。在科学计算中，二进制文件经常用于高效存储和数据访问。其他一些例子包括科学数据格式，如NetCDF或HDF，它们具有特定的格式并提供用于读写的应用程序编程接口(API)。
 
-The Linux kernel is responsible for organizing processes and interacting with files; it allocates time and memory to each process and handles the file system and communications in response to system calls. The Linux system uses files to represent everything in the system: devices, internals to the kernel, configurations, etc.
+Linux内核负责组织进程和与文件交互；它为每个进程分配时间和内存，并响应系统调用处理文件系统和通信。Linux系统使用文件来表示系统中的一切：设备、内核内部、配置等。

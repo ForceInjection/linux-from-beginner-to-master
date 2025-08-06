@@ -1,232 +1,570 @@
-# Text Editors
+# 文本编辑器
 
-A text editor is a tool to assist the user with creating and editing files. There is no "best" text editor; it depends on personal preferences. Regardless of your typical workflow, you will likely need to be proficient in using at least one common text editor if you are using Linux for scientific computing or similar work. Two of the most widely used command-line editors are **Vim** and **Emacs**, both of which are available on TACC systems via the `vim` and `emacs` commands, respectively.
+本主题介绍了Linux中常用的文本编辑器，重点关注Vim和Emacs。它涵盖了基本功能、导航、编辑特性以及与shell的交互。
 
-## Overview
+## 概述
 
-This topic is a brief introduction to the basics of both Vim and Emacs. It is recommended that you try each one and work through testing each of the commands to select which one works best for your workflow. Additional editors on Stampede2 you may want to consider are [nano](https://www.nano-editor.org/), a simple text editor designed for new users, or [gedit](https://help.gnome.org/users/gedit/stable/), a general-purpose text editor focused on simplicity and ease of use, with a simple GUI. There are also many more, so feel free to explore other options.
+文本编辑器是Linux系统中必不可少的工具，用于创建和修改文本文件、编写代码、编辑配置文件等。Linux提供了多种文本编辑器，从简单的命令行编辑器到功能强大的集成开发环境。
 
-Each text editor in Linux has a designed workflow to assist you in editing, and some workflows work better than others depending on your preferences. For example, Emacs relies heavily on key-chords (or multiple key strokes), while Vim uses distinct editing [modes](https://en.wikibooks.org/wiki/Learning_the_vi_Editor/Vim/Modes#Modes). Vim users tend to enter and exit the editor repeatedly and use the shell for complex tasks, while Emacs users typically remain within the editor and use Emacs itself for [complex tasks](https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell.html). Most users develop a preference for one text editor and stick with it.
+### 常见的Linux文本编辑器
 
-### What about Vi?
+- **Vim** - 功能强大的模态编辑器，是vi的改进版本
+- **Emacs** - 高度可定制的编辑器，具有丰富的功能
+- **nano** - 简单易用的命令行编辑器
+- **gedit** - GNOME桌面环境的图形化编辑器
+- **kate** - KDE桌面环境的高级文本编辑器
+- **VS Code** - 现代的跨平台代码编辑器
 
-The Vi editor (command is `vi`) is the predecessor of Vim. Most modern systems actually alias `vi` to `vim` so that you are using `vim` whenever you enter the `vi` command. You can determine if this is the case by entering the following:
+本教程主要关注Vim和Emacs，因为它们是最常用且功能最强大的命令行文本编辑器。
 
-```bash
-$ which vi
-alias vi='vim'
-    /bin/vim
-```    
+## Vim编辑器
 
-The line `alias vi='vim'` tells you that `vim` will be executed whenever the command `vi` is entered. The above output is actually from Stampede2. For this reason, we will focus on Vim in this tutorial and not Vi. We will also provide a basic overview of Emacs.
+### 什么是Vim？
 
-## Vim
+Vim（Vi IMproved）是一个高度可配置的文本编辑器，专为高效的文本编辑而设计。它是Unix系统中经典的vi编辑器的增强版本，在几乎所有Linux系统中都可以找到。
 
-![logo for Vim: The editor](img/vim_editor.gif)
+### Vim的特点
 
-Source: [vim.org](https://www.vim.org/logos.php)
+- **模态编辑** - 不同的操作模式提供不同的功能
+- **键盘驱动** - 几乎所有操作都可以通过键盘完成
+- **高度可定制** - 通过配置文件和插件系统可以高度定制
+- **强大的搜索和替换** - 支持正则表达式
+- **多文件编辑** - 可以同时编辑多个文件
+- **语法高亮** - 支持多种编程语言的语法高亮
 
-### Basic Functions
+### Vim的操作模式
 
-*   **Open** an existing file by entering **`vim`** in the shell followed by the name of the file.
-*   **Create** a new file in the same way as opening a file by specifying the new filename. The new file will not be saved unless specified.
-*   **Save** a file that is currently open by entering the **`:w`** command.
-*   **Quit** an open file by entering the **`:q`** command. If you have made any edits without saving, you will see an error message. If you wish to _quit without saving_ the edits, use **`:q!`**.
-*   **Save and Quit** at the same time by combining the commands: **`:wq`**.
-*   **Edit** the file by entering insert mode to add and remove text. Entering into normal mode will allow you to easily copy, paste, and delete (as well as other functionality).
-*   **Cancel** a command before completely entering it by hitting **`Esc`** twice.
+Vim有几种不同的操作模式：
 
-### Normal (Command) Mode
+#### 普通模式（Normal Mode）
 
-Vim starts in normal mode, and returns to normal mode whenever you exit another mode. When in normal mode, there is no text at the bottom of the shell, except the commands you are entering.
+- 这是Vim的默认模式
+- 用于导航和执行命令
+- 按`Esc`键可以从其他模式返回到普通模式
 
-### Navigation
+#### 插入模式（Insert Mode）
 
-Navigation in normal mode has a large number of shortcuts and extra features, which we will only cover some of here. Basic movement can be done using the arrow keys or using the letter keys as shown in the table.
+- 用于输入和编辑文本
+- 从普通模式按以下键进入插入模式：
+  - `i` - 在光标前插入
+  - `a` - 在光标后插入
+  - `o` - 在当前行下方新建一行并插入
+  - `O` - 在当前行上方新建一行并插入
 
-Keys for basic movement.
+#### 可视模式（Visual Mode）
 
-| **Move** | **Key** |
-|---|---|
-| **&larr;** | h |
-| **&darr;** | j |
-| **&uarr;** | k |
-| **&rarr;** | l |
+- 用于选择文本
+- 从普通模式按以下键进入可视模式：
+  - `v` - 字符选择模式
+  - `V` - 行选择模式
+  - `Ctrl+v` - 块选择模式
 
-The benefits of using the alternate keys is that you do not have to move your hand back-and-forth to the arrow keys while in this mode, and can more effectively enter Vim commands (once you are practiced). Some other examples of navigation shortcuts include:
+#### 命令行模式（Command-line Mode）
 
-*   Move to the **beginning of the line**: `0`
-*   Move to the **end of the line**: `$`
-*   Move to the **beginning of the next word**: `w` This can also be used with a number to move multiple words at once (i.e. `5w` moves 5 words forward).
-*   Move to the **end of the current word**: `e` This can be used with a number in the same way that `w` can to move multiple words at once.
+- 用于执行Ex命令
+- 从普通模式按`:`进入命令行模式
 
-These extra navigation shortcuts become powerful when combined with other Vim functions, allowing you to edit text and navigate through the file without changing modes.
+### 基本Vim操作
 
-### Insert Mode
-
-When you first open a document, you will always start in normal mode and have to enter insert mode. To enter insert mode where the cursor is currently located in the file, press the letter **`i`** or the **`Insert`** key. Additionally, you can press the letter **`a`** (for append) if you would like to enter insert mode at the character after the cursor. To exit insert mode, press the **`Esc`** key. When in insert mode, `-- INSERT --` will be visible at the bottom of the shell. Navigation in insert mode is done with the standard arrow keys.
-
-### Editing Features
-
-Here are some important commands to know:
-
-*   **Undo** the previous command, even the last edit in insert mode, with the command **`u`**
-*   **Redo** the previous command (after undo) with **`Ctrl-R`**
-*   **Copy** (yank) characters, words, or lines:
-    *   **`yl`** to copy a single character under the cursor
-    *   **`yy`** to copy the current line
-    *   **`y#y`** or `#yy` where `#` is replaced with the number of lines you want to copy (i.e. `y25y` will copy 25 lines).
-*   **Paste** (put) characters, words, or lines:
-    *   **`p`** will paste after the cursor for characters and words, or on the next line (regardless of the cursor location within a line) if you are pasting lines.
-    *   **`P`** will paste before the cursor for characters and words, or on the preceding line (regardless of the cursor location within a line) if you are pasting lines.
-*   **Delete** or **Cut** characters, words, or lines (that can then be pasted elsewhere):
-    *   **`x`** to delete a single character under the cursor
-    *   **`dd`** to delete the current line
-    *   **`d#d`** or `#dd` where `#` is replaced with the number of lines you want to delete (similar to copy).
-*   **Search** for strings throughout a file and optionally **replace**:
-    *   A basic search for a word is simply **`/word`** followed by `Enter`. This will jump to the first occurrence of the word after the cursor. Phrases can also be used.
-    *   Once a search is active, you can use **`n`** to jump to the next occurrence and **`N`** to jump to the previous occurrence.
-    *   [Search and replace](https://vim.wikia.com/wiki/Search_and_replace) has many options, but one example is to find all occurrences of "foo" in the file and replace (substitute) them with "bar" with the command: **`:%s/foo/bar/g`**
-*   **Split** the screen _vertically_ or _horizontally_ to view multiple files at once in the same shell:
-    *   **`:sp <filename>`** will open the specified file above the current active file and split the screen horizontally.
-    *   **`:vsp <filename>`** will open the specified file to the left of the current active file and split the screen vertically
-    *   Navigate between split-screen files by pressing **`Ctrl-W`** followed by navigation keys (i.e. `Ctrl-W h` or `Ctrl-W ←` to move to the left file)
-    *   Also note that you can open several documents at once from the shell using appropriate flags. See `man vim` for more information.
-
-Any of the editing commands can easily be combined with navigation commands. For example, `5de` will delete the next 5 words, or `y$` will copy from the current cursor location to the end of the line. There are a large number of combinations and possible commands. Note that copying, pasting, and deleting can also be done efficiently using visual mode.
-
-### Visual Mode
-
-From normal mode, press the **`v`** key to enter visual mode. This mode enables you to highlight words in sections to perform commands on them, such as copy or delete. Navigation in visual mode is done with the normal mode navigation keys or the standard arrow keys. For example, if you are in normal mode and you want to copy a few words from a single line and paste them on another line:
-
-1.  Navigate to the first character of the first word you want to copy
-2.  Enter visual mode by `v`
-3.  Navigate to the last character of the last word you want to copy (this should highlight all the words you want)
-4.  Enter `y` to copy the words
-5.  Navigate to where you want to paste the words
-6.  Enter `p` to paste
-
-Note that step 6 will paste after the cursor instead of on the next line even if you have copied several lines. You can also replace that step with `P` to paste before the cursor.
-
-### Vim and the Shell
-
-Working with Vim regularly can mean switching back and forth between it and the shell, but there are two ways to simplify this. From normal mode, you can use the command **`:!`** followed by any shell command to execute a single command without closing the file. For example, `:!ls` will display the contents of the current directory. This will appear to background Vim while executing the command (so you can see the shell and output), and display the following message upon completion:
+#### 打开和创建文件
 
 ```bash
-Press ENTER or type command to continue
+# 打开现有文件
+vim filename.txt
+
+# 创建新文件
+vim newfile.txt
+
+# 以只读模式打开文件
+vim -R filename.txt
+
+# 同时打开多个文件
+vim file1.txt file2.txt file3.txt
 ```
 
-Pressing `Enter` will return you to your open file. Alternatively, you can simply background the file while in normal mode with **`Ctrl-Z`** to view the shell and issue commands. When you want to return to the file, use the foreground command **`fg`**. In this way, you can actually have a number of files open (with or without splitting the screen) all in the same shell, and easily switch between them. Note that if you background multiple files, the foreground command will bring them up in reverse order (most recent file accessed first).
+#### 保存和退出
 
-### Customization
+在命令行模式下（按`:`进入）：
 
-Vim uses a `.vimrc` file for customizations. Essentially, this file is to consist of Vim commands that you would like issued each time you open Vim to customize your experience. One example of a command you will likely want is `syntax on`, which provides syntax highlighting for programming languages. There are also a number of commands you can explore to customize the coloring of the syntax. Here is an example of a simple `.vimrc` file that you may use:
+```vim
+:w          " 保存文件
+:w filename " 另存为
+:q          " 退出（如果没有未保存的更改）
+:q!         " 强制退出（不保存更改）
+:wq         " 保存并退出
+:x          " 保存并退出（等同于:wq）
+ZZ          " 在普通模式下保存并退出
+```
 
-```bash
-syntax on
-set tabstop=4
-set expandtab
+#### 导航
+
+在普通模式下：
+
+```vim
+" 基本移动
+h           " 向左移动一个字符
+j           " 向下移动一行
+k           " 向上移动一行
+l           " 向右移动一个字符
+
+" 单词移动
+w           " 移动到下一个单词的开头
+b           " 移动到上一个单词的开头
+e           " 移动到当前单词的结尾
+
+" 行内移动
+0           " 移动到行首
+^           " 移动到行首第一个非空字符
+$           " 移动到行尾
+
+" 文件内移动
+gg          " 移动到文件开头
+G           " 移动到文件结尾
+:n          " 移动到第n行
+Ctrl+f      " 向下翻页
+Ctrl+b      " 向上翻页
+```
+
+#### 编辑操作
+
+在普通模式下：
+
+```vim
+" 删除
+x           " 删除光标下的字符
+dd          " 删除当前行
+dw          " 删除当前单词
+d$          " 删除到行尾
+
+" 复制（yank）
+yy          " 复制当前行
+yw          " 复制当前单词
+y$          " 复制到行尾
+
+" 粘贴
+p           " 在光标后粘贴
+P           " 在光标前粘贴
+
+" 撤销和重做
+u           " 撤销
+Ctrl+r      " 重做
+
+" 替换
+r           " 替换光标下的字符
+R           " 进入替换模式
+```
+
+#### 搜索和替换
+
+```vim
+" 搜索
+/pattern    " 向前搜索
+?pattern    " 向后搜索
+n           " 查找下一个匹配
+N           " 查找上一个匹配
+
+" 替换
+:s/old/new/         " 替换当前行第一个匹配
+:s/old/new/g        " 替换当前行所有匹配
+:%s/old/new/g       " 替换整个文件所有匹配
+:%s/old/new/gc      " 替换整个文件所有匹配（确认每个替换）
+```
+
+### 多文件编辑
+
+```vim
+" 文件间切换
+:next       " 切换到下一个文件
+:prev       " 切换到上一个文件
+:first      " 切换到第一个文件
+:last       " 切换到最后一个文件
+
+" 缓冲区管理
+:ls         " 列出所有缓冲区
+:b n        " 切换到缓冲区n
+:bd         " 删除当前缓冲区
+```
+
+### 分屏操作
+
+```vim
+" 水平分屏
+:split filename     " 水平分屏打开文件
+Ctrl+w s           " 水平分割当前窗口
+
+" 垂直分屏
+:vsplit filename    " 垂直分屏打开文件
+Ctrl+w v           " 垂直分割当前窗口
+
+" 窗口间导航
+Ctrl+w h           " 移动到左边窗口
+Ctrl+w j           " 移动到下面窗口
+Ctrl+w k           " 移动到上面窗口
+Ctrl+w l           " 移动到右边窗口
+
+" 关闭窗口
+Ctrl+w q           " 关闭当前窗口
+:q                 " 关闭当前窗口
+```
+
+### Vim配置
+
+#### .vimrc配置文件
+
+Vim的配置存储在用户家目录下的`.vimrc`文件中：
+
+```vim
+" ~/.vimrc 示例配置
+
+" 显示行号
 set number
-set hls
+
+" 启用语法高亮
+syntax on
+
+" 设置缩进
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" 启用自动缩进
+set autoindent
+set smartindent
+
+" 显示匹配的括号
+set showmatch
+
+" 启用搜索高亮
+set hlsearch
+set incsearch
+
+" 启用鼠标支持
+set mouse=a
+
+" 设置颜色主题
+colorscheme desert
+
+" 显示状态栏
+set laststatus=2
+
+" 启用文件类型检测
+filetype on
+filetype plugin on
+filetype indent on
 ```
 
-In addition to syntax highlighting, the above customizations will set tabs to be 4 characters wide, replace tabs with spaces, show line numbers along the left-hand side of the screen, and highlight matching words when searching. There is a global `vimrc` file that sets system-wide Vim initializations (you will not have access to this on Stampede2), and each user has their own located at `~/.vimrc` wich can be used for personal initializations.
+### 与Shell的交互
 
-### A Hands-On Tutorial
+```vim
+" 在Vim中执行shell命令
+:!command           " 执行shell命令
+:!ls                " 列出当前目录文件
+:!make              " 编译项目
 
-One of the most effective ways to learn Vim is through the built-in hands-on tutorial that can be accessed via the shell by the command **`vimtutor`**. This command will open a text file in Vim that will walk you through all the major functionalities of Vim as well as a few useful tips and tricks. If you plan to use Vim even occasionally, it is a great resource. Furthermore, the above list of features and commands is not exhaustive, and the interested new Vim user should certainly explore the man pages and online resources to discover more Vim features.
+" 读取命令输出到文件
+:r !command         " 将命令输出插入到当前位置
+:r !date            " 插入当前日期
 
-## Emacs
+" 挂起Vim
+Ctrl+z              " 挂起Vim，返回shell
+fg                  " 在shell中恢复Vim
+```
 
-![Emacs logo](img/emacs.png)
+### Vim学习资源
 
-Source: [gnu.org](https://www.gnu.org/software/emacs/emacs.html)
+#### vimtutor
 
-### Basic Functionality
+Vim自带了一个交互式教程：
 
-*   **Open** an existing file by entering **`emacs`** in the shell followed by the name of the file. This will default to running Emacs in a GUI, but it can also be run within the shell (`emacs -nw`). Note that to use the GUI with a remote connection such as Stampede2, you must use X11 forwarding (covered in the Remote Connections section), otherwise the `emacs` command will open within the shell. If you want to run the GUI and keep the shell free, you can open and background Emacs with `emacs &`. Use `Ctrl-x f` to open a file from within Emacs.
-*   **Create** a new file in the same way as opening a file by specifying the new filename. The new file will not be saved unless specified.
-*   **Save** a file that is currently open by entering the **`Ctrl-x Ctrl-s`** command.
-*   **Quit** by entering **`Ctrl-x Ctrl-c`**.
-*   **Save and Quit** is the same command as quitting, except that when you have unsaved files it will ask if you would like to save each one. To save, enter `y`.
-*   **Edit** a file by simply entering and removing text.
-*   **Cancel** a command before completely entering it or a command that is executing with **`Ctrl-g`** or by hitting **`Esc`** 3 times.
+```bash
+vimtutor
+```
 
-### Navigation
+这个教程大约需要30分钟完成，是学习Vim基础操作的最佳方式。
 
-Similar to Vim, navigation in Emacs has shortcuts and extra features. Basic movement can be done using the arrow keys or using the letter keys in the following table:
+## Emacs编辑器
 
-Keys for basic movement.
+### 什么是Emacs？
 
-| **Move** | **Command** |
-|---|---|
-| **&larr;** | Ctrl-b |
-| **&darr;** | Ctrl-n |
-| **&uarr;** | Ctrl-p |
-| **&rarr;** | Ctrl-f |
+Emacs是一个高度可扩展和可定制的文本编辑器。它不仅仅是一个编辑器，更像是一个可编程的编辑环境，可以通过Emacs Lisp语言进行扩展。
 
-The benefits of using the alternate keys is that you do not have to move your hand back-and-forth to the arrow keys, and can more effectively enter Emacs commands (once you are practiced). Some other examples of navigation shortcuts include:
+### Emacs的特点
 
-*   Move to the **next screen view**: `Ctrl-v`
-*   Move to the **previous screen view**: `Alt-v`
-*   Move to the **next word**: `Alt-f` This can also be used with a number to move multiple words at once (i.e. `Alt-5f` moves 5 words forward).
-*   Move to the **previous word**: `Alt-b` This can be used with a number in the same way to move multiple words at once.
-*   Move to the **beginning of the line**: `Ctrl-a`
-*   Move to the **end of the line**: `Ctrl-e`
-*   Move to the **beginning of a sentence**: `Alt-a`
-*   Move to the **end of a sentence**: `Alt-e`
+- **高度可扩展** - 通过Emacs Lisp可以添加几乎任何功能
+- **统一的键绑定** - 一致的键盘快捷键系统
+- **内置功能丰富** - 包括文件管理、邮件、新闻阅读等
+- **强大的编辑功能** - 支持多种编程语言和标记语言
+- **跨平台** - 可在多种操作系统上运行
 
-Note that the more customary keys `Page Up`, `Page Down`, `Home`, and `End` all work as expected.
+### 基本Emacs操作
 
-### Editing Features
+#### 启动Emacs
 
-Here are some important commands to know:
+```bash
+# 启动Emacs
+emacs
 
-*   **Undo** the previous command with the command **`Ctrl-x u`**
-*   **Redo** the previous command (after undo) by performing a non-editing command (such as `Ctrl-f`), and then undo the undo with `Ctrl-x u`
-*   **Delete** or **Cut** characters, words, or lines (that can then be pasted elsewhere):
-    *   **`Backspace`** to delete a single character before the cursor
-    *   **`Ctrl-d`** to delete a single character after the cursor
-    *   **`Alt-Backspace`** to delete the word before the cursor
-    *   **`Alt-d`** to delete the word after the cursor
-    *   **`Ctrl-k`** to delete from the cursor to end of the line
-    *   **`Alt-k`** to delete from the cursor to end of the sentence
-*   **Paste** characters, words, or lines:
-    *   **`Ctrl-y`** pastes the most recent deleted text
-    *   **`Alt-y`** pastes the deleted text before the most recent
-*   **Copy** characters, words, or lines: The easiest way to copy is actually to _cut_ the text and then paste it back where it was. Then it can be pasted in a new location also.
-*   **Search** for strings throughout a file and optionally **replace**:
-    *   **`Ctrl-s`** starts a forward search that is incremental (each character you enter updates the search). Entering `Ctrl-s` again skips to the next occurrence. `Enter` ends the search.
-    *   **`Ctrl-r`** starts a backwards search that behaves similarly to the forward search.
-    *   [Search and replace](https://www.gnu.org/software/emacs/manual/html_node/emacs/Search.html#Search) has many options, but one example is to find all occurrences of "foo" in the file and replace them with "bar" with the command: **`Alt-x replace-string foo Enter bar`**
-    *   You can use tab-completion for entering commands after typing `Alt -x`. For example, type `Alt-x`, then `rep`, then hit `Tab` twice to see a list of matching commands. Since similar commands are named similarly, you will find other useful related commands, such as `replace-regexp`.
-*   **Split** the screen _vertically_ or _horizontally_ to view multiple files at once in emacs:
-    *   **`Ctrl-x 3`** will split the screen horizontally
-    *   **`Ctrl-x 2`** will split the screen vertically
-    *   **`Ctrl-x 1`** closes all panes except the active one
-    *   **`Ctrl-x 0`** closes a pane
+# 在终端中启动Emacs（无图形界面）
+emacs -nw
 
-### Highlighting Mode
+# 打开特定文件
+emacs filename.txt
+```
 
-This mode enables you to highlight words in sections to perform commands on them, such as copy or delete. For example, if you want to copy a few words from a single line and paste them on another line:
+#### Emacs键绑定约定
 
-1.  Navigate to the first character of the first word you want to copy
-2.  Enter highlighting mode by `Ctrl-Space`
-3.  Navigate to the last character of the last word you want to copy (this should highlight all the words you want)
-4.  Enter `Alt-w` to copy the words
-5.  Navigate to where you want to paste the words
-6.  Enter `Ctrl-y` to paste
+- `C-` 表示Ctrl键
+- `M-` 表示Meta键（通常是Alt键）
+- `C-x` 表示先按Ctrl+x，然后松开
+- `C-x C-f` 表示先按Ctrl+x，然后按Ctrl+f
 
-### Emacs and the Shell
+#### 基本文件操作
 
-There are several options for running shell commands from Emacs. To execute a single shell command while in Emacs, use the command **`Alt-!`** followed by the shell command and hit `Enter`. The output of the command will display in a portion of the screen called an [echo area](https://www.gnu.org/software/emacs/manual/html_node/emacs/Echo-Area.html). There are several more features for running shell commands, including running an interactive shell inside Emacs (we recommend [ansi-term](https://www.emacswiki.org/emacs/AnsiTerm)). For more about these features, please see the [Emacs documentation](https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell.html) on the topic. Alternatively, you can suspend Emacs with the command **`Ctrl-z`**. As with suspending Vim, you can execute commands in the shell, and then return to Emacs with the foreground command **`fg`**.
+```emacs
+C-x C-f     " 打开文件
+C-x C-s     " 保存文件
+C-x C-w     " 另存为
+C-x C-c     " 退出Emacs
+C-x C-v     " 访问另一个文件（替换当前缓冲区）
+```
 
-### Customization
+#### 导航
 
-Emacs is customizable in many ways including changing the [key bindings](https://www.gnu.org/software/emacs/manual/html_node/emacs/Key-Bindings.html) for commands, the color scheme (themes), and more. Due to the breadth of options, we refer you to existing documentation on [customization](https://www.gnu.org/software/emacs/manual/html_node/emacs/Customization.html).
+```emacs
+" 基本移动
+C-f         " 向前移动一个字符
+C-b         " 向后移动一个字符
+C-n         " 向下移动一行
+C-p         " 向上移动一行
 
-### A Hands-On Tutorial
+" 单词和行移动
+M-f         " 向前移动一个单词
+M-b         " 向后移动一个单词
+C-a         " 移动到行首
+C-e         " 移动到行尾
 
-One of the most effective ways to learn Emacs is through the built-in hands-on tutorial that can be accessed by opening Emacs without any filename input. It will walk you through all the major functionalities of Emacs as well as a few useful tips and tricks. If you plan to use Emacs even occasionally, it is a great resource. Furthermore, the above list of features and commands is not exhaustive, and the interested new Emacs user should certainly explore the man pages and online resources to discover more Emacs features. In particular, [buffers](https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffers.html) are a useful concept to understand when using Emacs, but are not covered here.
+" 段落和页面移动
+M-{         " 移动到段落开头
+M-}         " 移动到段落结尾
+C-v         " 向下翻页
+M-v         " 向上翻页
 
-Additionally, you may want to consider looking into [spacemacs](https://www.spacemacs.org/) if you are familiar with Vim key bindings or would like to continue using emacs with more customization. Users can install spacemacs to their local directory on Stampede2 using git.
+" 文件移动
+M-<         " 移动到文件开头
+M->         " 移动到文件结尾
+M-g g       " 跳转到指定行号
+```
+
+#### 编辑操作
+
+```emacs
+" 删除
+C-d         " 删除光标后的字符
+DEL         " 删除光标前的字符
+M-d         " 删除光标后的单词
+M-DEL       " 删除光标前的单词
+C-k         " 删除到行尾
+
+" 复制和粘贴
+C-SPC       " 设置标记（开始选择）
+C-w         " 剪切选中的文本
+M-w         " 复制选中的文本
+C-y         " 粘贴
+M-y         " 循环粘贴历史
+
+" 撤销
+C-/         " 撤销
+C-x u       " 撤销
+```
+
+#### 搜索和替换
+
+```emacs
+" 搜索
+C-s         " 向前增量搜索
+C-r         " 向后增量搜索
+M-C-s       " 正则表达式向前搜索
+M-C-r       " 正则表达式向后搜索
+
+" 替换
+M-%         " 查询替换
+M-C-%       " 正则表达式查询替换
+```
+
+在查询替换过程中：
+
+- `y` - 替换当前匹配
+- `n` - 跳过当前匹配
+- `!` - 替换所有剩余匹配
+- `q` - 退出替换
+
+### 缓冲区和窗口管理
+
+#### 缓冲区操作
+
+```emacs
+C-x b       " 切换到另一个缓冲区
+C-x C-b     " 列出所有缓冲区
+C-x k       " 关闭缓冲区
+C-x C-q     " 切换只读模式
+```
+
+#### 窗口操作
+
+```emacs
+" 分屏
+C-x 2       " 水平分屏
+C-x 3       " 垂直分屏
+
+" 窗口导航
+C-x o       " 切换到下一个窗口
+C-x 0       " 关闭当前窗口
+C-x 1       " 关闭其他所有窗口
+C-x 4 f     " 在另一个窗口中打开文件
+```
+
+### 高级功能
+
+#### 矩形选择和编辑
+
+```emacs
+C-x r k     " 剪切矩形区域
+C-x r y     " 粘贴矩形区域
+C-x r o     " 在矩形区域插入空白
+C-x r t     " 在矩形区域插入文本
+```
+
+#### 宏录制和播放
+
+```emacs
+C-x (       " 开始录制宏
+C-x )       " 结束录制宏
+C-x e       " 执行宏
+C-u n C-x e " 执行宏n次
+```
+
+### 与Shell的交互
+
+#### 执行Shell命令
+
+```emacs
+M-!         " 执行shell命令
+M-|         " 对选中区域执行shell命令
+C-u M-!     " 执行shell命令并插入输出
+```
+
+#### 运行交互式Shell
+
+```emacs
+M-x shell   " 启动shell缓冲区
+M-x eshell  " 启动Emacs shell
+M-x term    " 启动终端模拟器
+```
+
+#### 挂起Emacs
+
+```emacs
+C-z         " 挂起Emacs（在终端中）
+C-x C-z     " 挂起Emacs（图形界面中最小化）
+```
+
+在shell中使用`fg`命令可以恢复挂起的Emacs。
+
+### Emacs定制
+
+#### 配置文件
+
+Emacs的配置文件通常是`~/.emacs`或`~/.emacs.d/init.el`：
+
+```elisp
+;; ~/.emacs 示例配置
+
+;; 显示行号
+(global-linum-mode t)
+
+;; 启用语法高亮
+(global-font-lock-mode t)
+
+;; 显示匹配的括号
+(show-paren-mode t)
+
+;; 启用自动保存
+(setq auto-save-default t)
+
+;; 设置缩进
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
+;; 启用列号显示
+(column-number-mode t)
+
+;; 禁用启动画面
+(setq inhibit-startup-message t)
+
+;; 设置颜色主题
+(load-theme 'tango-dark t)
+```
+
+### Emacs学习资源
+
+#### 内置教程
+
+Emacs包含一个内置的交互式教程：
+
+```emacs
+C-h t       " 启动Emacs教程
+```
+
+#### 帮助系统
+
+```emacs
+C-h ?       " 显示帮助选项
+C-h k       " 描述键绑定
+C-h f       " 描述函数
+C-h v       " 描述变量
+C-h m       " 描述当前模式
+```
+
+## 选择合适的编辑器
+
+### Vim vs Emacs
+
+| 特性 | Vim | Emacs |
+|------|-----|-------|
+| 学习曲线 | 陡峭但快速上手 | 较平缓但功能复杂 |
+| 模态编辑 | 是 | 否 |
+| 内存使用 | 较少 | 较多 |
+| 启动速度 | 快 | 较慢 |
+| 扩展性 | 通过插件 | 通过Emacs Lisp |
+| 键盘效率 | 非常高 | 高 |
+| 内置功能 | 专注编辑 | 功能丰富 |
+
+### 选择建议
+
+- **选择Vim如果**：
+  - 你喜欢模态编辑的概念
+  - 你需要在资源受限的环境中工作
+  - 你主要进行文本编辑和编程
+  - 你喜欢快速的启动时间
+
+- **选择Emacs如果**：
+  - 你喜欢高度可定制的环境
+  - 你需要集成的工作环境（编辑、邮件、新闻等）
+  - 你愿意投入时间学习Emacs Lisp
+  - 你喜欢一致的键绑定系统
+
+- **选择nano如果**：
+  - 你是Linux新手
+  - 你需要快速编辑简单文件
+  - 你不想学习复杂的键绑定
+
+## 总结
+
+文本编辑器是Linux系统中的重要工具。Vim和Emacs都是功能强大的编辑器，各有其优势：
+
+- **Vim**以其高效的模态编辑和快速的性能著称
+- **Emacs**以其高度的可扩展性和丰富的内置功能闻名
+
+选择哪个编辑器主要取决于个人偏好、工作需求和学习投入。无论选择哪个，掌握一个强大的文本编辑器都会显著提高你在Linux环境中的工作效率。
+
+建议初学者从基本操作开始，逐步学习高级功能，并通过实际使用来熟练掌握所选择的编辑器。

@@ -42,6 +42,7 @@ rm: cannot remove 'directory': Device or resource busy
 lsof +D /path
 fuser -vm /path
 ```
+
 另外如果是挂载的文件，请执行：
 
 ```bash
@@ -62,7 +63,6 @@ rm: cannot remove 'directory': Read-only file system
 mount | grep /path/to/mount
 sudo mount -o remount,rw /path/to/mount
 ```
-
 
 5\. **Operation not permitted**
 
@@ -108,5 +108,4 @@ rm: cannot remove 'directory': File name too long
 rmdir: failed to remove 'file': Not a directory
 ```
 
-解决方法： 使用 `rm` 删除文件，而不是 `rmdir`。
-
+**解决方法**： 使用 `rm` 删除文件，而不是 `rmdir`。

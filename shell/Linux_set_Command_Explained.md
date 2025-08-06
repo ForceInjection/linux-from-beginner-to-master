@@ -2,7 +2,7 @@
 
 `set` 命令用于显示和设置 shell 及 Linux 环境中的各种变量、选项。它广泛适用于不同的 shell，例如 Bourne shell (sh)、C shell (csh) 和 Korn shell (ksh)，但在 Bash 中更常用。`set` 提供了强大的控制功能，使用户可以改变 shell 的行为，尤其适合调试、错误处理、环境配置等场景。
 
-### 基本语法
+## 1. 基本语法
 
 ```bash
 set [options] [arguments]
@@ -11,9 +11,9 @@ set [options] [arguments]
 - **options**：影响 shell 操作方式的选项标志。
 - **arguments**：设置位置参数（即 `$1`, `$2`, 等）的值。
 
-### 选项详解
+## 2. 选项详解
 
-#### 常用选项
+### 2.1 常用选项
 
 | 选项 | `-o` 标志 | 描述 |
 |------|-----------|------|
@@ -47,8 +47,7 @@ set [options] [arguments]
 | 无 | `-o posix` | 使 Bash 的行为与 POSIX 标准一致。 |
 | 无 | `-o vi` | 使用类似 `vi` 的行编辑接口。 |
 
-
-### 常见用法与示例
+## 3. 常见用法与示例
 
 1. **显示所有 shell 变量**  
    执行 `set` 不带任何参数，将输出当前 shell 中的所有变量及其值。
@@ -137,7 +136,8 @@ set [options] [arguments]
    set -o allexport -o notify
    ```
 
-### 高级应用
+## 4. 高级应用
+
 - **防止脚本运行时误操作**  
    使用 `-C` 防止覆盖重要文件，结合 `-e` 在错误时退出，确保关键任务的健壮性。
   
